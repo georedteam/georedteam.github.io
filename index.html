@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GeoRedteam</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+    <link rel="stylesheet" href="./static/css/bulma.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="./static/css/academicons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" href="./static/css/index.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="./static/js/fontawesome.all.min.js"></script>
+    <script src="./static/js/bulma-carousel.min.js"></script>
+    <script src="./static/js/bulma-slider.min.js"></script>
+    <script src="./static/js/index.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</head>
+
+<body>
+
+
+    <section class="hero">
+        <div class="hero-body">
+            <div class="container is-max-desktop">
+                <div class="columns is-centered">
+                    <div class="column has-text-centered">
+
+
+                        <h1 class="title is-1 publication-title">
+                         Geometric Red-Teaming for Robotic Manipulation
+                        </h1>
+                        <div class="is-size-5 publication-authors">
+                            <span class="author-block">
+                                <a target="_blank" href="https://georedteam.github.io"> Anonymous Submission</a>
+                            </span>
+                        </div>
+
+                        <div class="is-size-5 publication-authors">
+                            <span class="author-block">CoRL 2025</span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container is-max-desktop">
+            <!-- Abstract. -->
+            <div class="columns is-centered has-text-centered">
+                <div class="column">
+                    <h2 class="title is-3">Abstract</h2>
+                    <div class="content has-text-justified">
+                        <p style="font-size: 125%">
+                          Standard evaluation protocols in robotic manipulation typically assess policy performance over curated, in-distribution test sets, offering limited insight into how systems fail under plausible variation. 
+                          We introduce a red-teaming framework that probes robustness through object-centric geometric perturbations, automatically generating CrashShapes---structurally valid, user-constrained mesh deformations that trigger catastrophic failures in pre-trained manipulation policies. 
+                          The method integrates a Jacobian field–based deformation model with a gradient-free, simulator-in-the-loop optimization strategy.
+                          Across insertion, articulation, and grasping tasks, our approach consistently discovers deformations that collapse policy performance, revealing brittle failure modes missed by static benchmarks. 
+                          By combining task-level policy rollouts with constraint-aware shape exploration, we aim to build a general purpose framework for structured, object-centric robustness evaluation in robotic manipulation.
+                          We additionally show that fine-tuning on individual CrashShapes, a process we refer to as blue-teaming, improves task success by up to 60 percentage points on those shapes, while preserving performance on the original object, demonstrating the utility of red-teamed geometries for targeted policy refinement.
+                          Finally, we validate both red-teaming and blue-teaming results with a real robotic arm, confirming that the discovered red-teaming failure cases, and corresponding blue-teaming refinement, transfer from simulation to the real world.
+<br>
+<br>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+<script>
+
+  timeoutIds = [];
+
+  function typeWriter(txt, i, q, num, text1, text2) {
+      var imgText = document.getElementById(text1 + num);
+      var answer = document.getElementById(text2 + num);
+      if (imgText.innerHTML == q) {
+          for (let k = 0; k < 5; k++) {
+              if (i < txt.length) {
+                  if (txt.charAt(i) == "\\") {
+                      answer.innerHTML += "\n";
+                      i += 1;
+                  } else {
+                      answer.innerHTML += txt.charAt(i);
+                  }
+                  i++;
+              }
+          }
+          hljs.highlightAll();
+          timeoutIds.push(setTimeout(typeWriter, 1, txt, i, q, num, text1, text2));
+      }
+  }
+
+</script>
+
+</html>
