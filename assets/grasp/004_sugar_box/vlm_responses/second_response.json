@@ -1,0 +1,12 @@
+{
+    "semantic_object_label": "Cube",
+    "keypoint_indices": [
+        0,
+        3,
+        6,
+        9
+    ],
+    "expected_transformations": [
+        "Shear along the top face."
+    ]
+}

@@ -1,0 +1,11 @@
+{
+    "semantic_object_label": "Rectangular Prism",
+    "keypoint_indices": [
+        0,
+        5,
+        8
+    ],
+    "expected_transformations": [
+        "Stretch object along the vertical axis."
+    ]
+}

@@ -1,0 +1,11 @@
+{
+    "semantic_object_label": "Spoon",
+    "keypoint_indices": [
+        0,
+        1,
+        4
+    ],
+    "expected_transformations": [
+        "Bending or twisting the bowl of the spoon"
+    ]
+}

@@ -24,19 +24,180 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
-    <script>hljs.highlightAll();</script>
+    <style>
+        .real-world-validation-section .scenario {
+          margin-bottom: 3rem;
+        }
+
+
+        .table-container .table.is-fullwidth {
+            table-layout: fixed;
+        }
+      
+        .lead-video-player-wrapper {
+          border-radius: 15px;      
+          overflow: hidden;
+          background-color: #363636; 
+          position: relative;
+          margin: 0 auto 1rem;      
+          display: block;            
+          width: 180px;              
+        }
+      
+        .lead-video-player-wrapper video {
+          display: block;
+          width: 100%;  
+          height: auto; 
+        }
+      
+        .video-thumbnail-strip {
+          display: flex;
+          gap: 10px;     
+          flex-wrap: wrap;
+          justify-content: center;  
+        }
+      
+        .video-thumbnail-strip .thumbnail-video-wrapper {
+          position: relative;
+          width: 120px;
+          height: 70px;
+          border-radius: 8px;
+          overflow: hidden;
+          cursor: pointer;
+          border: 3px solid transparent;
+          transition: border-color 0.2s ease-in-out,
+                      transform    0.2s ease-in-out;
+          background-color: #2b2b2b;
+        }
+      
+        .video-thumbnail-strip .thumbnail-video-wrapper video.thumbnail-video {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          pointer-events: none;
+          display: block;
+        }
+      
+        .video-thumbnail-strip .thumbnail-video-wrapper:hover {
+          border-color: #dbdbdb;
+          transform: scale(1.05);
+        }
+      
+        .video-thumbnail-strip .thumbnail-video-wrapper.active {
+          border-color: #3273dc;
+          transform: scale(1.05);
+        }
+      
+        .scenario-summary {
+          margin-bottom: 0.75rem;
+          font-size: 1.1rem;
+        }
+
+        .outcome-indicator {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            width: 24px; 
+            height: 24px;
+            border-radius: 50%;
+            display: flex; 
+            align-items: center;
+            justify-content: center;
+            z-index: 10; 
+            pointer-events: none; 
+            box-shadow: 0 1px 3px rgba(0,0,0,0.4); 
+        }
+
+        .outcome-indicator i { 
+            font-size: 14px; 
+            color: white;    
+            line-height: 1;  
+        }
+
+        .thumbnail-video-wrapper[data-outcome="success"] .outcome-indicator {
+            background-color: #28a745; 
+        }
+
+        .thumbnail-video-wrapper[data-outcome="failure"] .outcome-indicator {
+            background-color: #dc3545; 
+        }
+
+        .png-image-display-section .image img, 
+        .vlm-prompting-strategy-section .image img { 
+            border: 1px solid #dbdbdb; 
+            box-shadow: 0 2px 3px rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.1); 
+            border-radius: 6px; 
+            max-height: 80vh; 
+            width: auto; 
+            max-width: 100%; 
+        }
+        
+        .vlm-interactive-section .scrollable-prompt-window { 
+            max-height: 280px;
+            overflow-y: auto; 
+            border: 1px solid #dbdbdb; 
+            padding: 0.75em; 
+            border-radius: 4px; 
+            background-color: #f9f9f9; 
+            margin-top: 0.5em;
+        }
+        .vlm-interactive-section .scrollable-prompt-window pre { 
+            white-space: pre-wrap; 
+            background-color: transparent !important;
+            padding: 0; 
+            font-size: 0.8rem; 
+            color: #363636;
+        }
+        .vlm-interactive-section #s1-vlm-output-thumbnails img.s1-output-thumbnail { 
+            border: 2px solid transparent; 
+            margin-bottom: 5px; 
+            cursor: pointer; 
+            object-fit: cover; 
+            width: 80px;
+            height: 50px;
+            border-radius: 4px;
+        }
+        .vlm-interactive-section #s1-vlm-output-thumbnails img.s1-output-thumbnail.active { 
+            border-color: #3273dc;
+            box-shadow: 0 0 5px #3273dc;
+        }
+        .vlm-interactive-section #s1-original-object-gif, 
+        .vlm-interactive-section #s1-vlm-output-large-gif,
+        .vlm-interactive-section #s2-vlm-output-large-gif,
+        .vlm-interactive-section #s1-canonical-view-panel-img { 
+            border: 1px solid #eee; 
+            background-color: #f5f5f5; 
+            display: block; 
+            width:100%; 
+            height:auto;
+            border-radius: 4px;
+        }
+        .vlm-interactive-section .box { 
+            background-color: #fff; 
+            padding: 1.25rem;
+        }
+        .vlm-interactive-section .tabs.is-boxed li.is-active a { 
+            background-color: #fff; /* Or theme color */
+            border-bottom-color: transparent; 
+        }
+        .vlm-interactive-section .field {
+            margin-bottom: 1.25rem;
+        }
+        .vlm-interactive-section .title.is-5, .vlm-interactive-section .title.is-6 {
+            margin-bottom: 0.75rem;
+        }
+        .vlm-interactive-section .is-size-7 { font-size: 0.8rem !important; }
+
+      </style>      
 </head>
 
 <body>
-
 
     <section class="hero">
         <div class="hero-body">
             <div class="container is-max-desktop">
                 <div class="columns is-centered">
                     <div class="column has-text-centered">
-
-
                         <h1 class="title is-1 publication-title">
                          Geometric Red-Teaming for Robotic Manipulation
                         </h1>
@@ -45,23 +206,28 @@
                                 <a target="_blank" href="https://georedteam.github.io"> Anonymous Submission</a>
                             </span>
                         </div>
-
                         <div class="is-size-5 publication-authors">
                             <span class="author-block">CoRL 2025</span>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="section">
+    <section class="section png-image-display-section pb-2">
+        <div class="container is-max-desktop has-text-centered">
+            <figure class="image" style="margin-bottom: 1rem; display: inline-block;">
+                <img src="./assets/figures/pull_figure.png" alt="Overview of the Geometric Red-Teaming framework showing object deformation and policy failure." style="max-height: 75vh; width: auto; max-width: 100%;">
+            </figure>
+            </div>
+    </section>
+
+    <section class="section pt-2 pb-2">
         <div class="container is-max-desktop">
-            <!-- Abstract. -->
-            <div class="columns is-centered has-text-centered">
+            <div class="columns is-centered">
                 <div class="column">
-                    <h2 class="title is-3">Abstract</h2>
+                    <h2 class="title is-3 has-text-centered">Abstract</h2>
                     <div class="content has-text-justified">
                         <p style="font-size: 125%">
                           Standard evaluation protocols in robotic manipulation typically assess policy performance over curated, in-distribution test sets, offering limited insight into how systems fail under plausible variation. 
@@ -71,8 +237,7 @@
                           By combining task-level policy rollouts with constraint-aware shape exploration, we aim to build a general purpose framework for structured, object-centric robustness evaluation in robotic manipulation.
                           We additionally show that fine-tuning on individual CrashShapes, a process we refer to as blue-teaming, improves task success by up to 60 percentage points on those shapes, while preserving performance on the original object, demonstrating the utility of red-teamed geometries for targeted policy refinement.
                           Finally, we validate both red-teaming and blue-teaming results with a real robotic arm, confirming that the discovered red-teaming failure cases, and corresponding blue-teaming refinement, transfer from simulation to the real world.
-<br>
-<br>
+<br><br>
                         </p>
                     </div>
                 </div>
@@ -80,32 +245,823 @@
         </div>
     </section>
 
-</body>
+    <section class="section system-overview-section py-4">
+        <div class="container is-max-desktop">
+            <div class="heading has-text-centered" style="margin-bottom: 2rem;">
+                <h2 class="title is-3">System Overview</h2>
+            </div>
+            
+            <figure class="image" style="margin-bottom: 1rem; display: block; margin-left: auto; margin-right: auto; max-width: 800px;"> <img src="./assets/figures/system_figure.png" alt="System overview of our geometric red-teaming pipeline." style="max-height: 80vh; width: auto; max-width: 100%;"> </figure>
+            
+            <div class="content has-text-justified" style="margin-top: 1rem;">
+                <p class="is-size-6 figure-caption">
+                    <strong>System overview of our geometric red-teaming pipeline.</strong> Given a task description and nominal object (<em>Initialization Parameters</em>), our pipeline first selects anchor and handle points using a vision-language model (<strong>a</strong>). Initial handle displacements are sampled to define a population of deformation candidates. Each sample is converted into a perturbed mesh via Jacobian field-based optimization (<strong>b</strong>) and evaluated in simulation with a frozen policy (<strong>c</strong>). Deformations that induce failure are selected and mutated to guide the next population.
+                </p>
+            </div>
 
-<script>
+            <div class="heading has-text-centered" style="margin-top: 3rem; margin-bottom: 2rem;">
+                <h3 class="title is-4">Simulation Demos</h3>
+            </div>
 
-  timeoutIds = [];
+            <div class="table-container">
+                <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                    <thead>
+                        <tr>
+                            <th>Object Type</th>
+                            <th class="has-text-centered">Task 1: Grasping</th>
+                            <th class="has-text-centered">Task 2: Insertion</th>
+                            <th class="has-text-centered">Task 3: Articulation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Nominal Objects</strong></td>
+                            <td>
+                                <figure class="image ">
+                                    <video controls preload="metadata" src="./assets/red_teaming_exps/simulation/mug_nominal.mov" type="video/mov">Your browser does not support the video tag.</video>
+                                </figure>
+                            </td>
+                            <td>
+                                <figure class="image">
+                                    <video controls preload="metadata" src="./assets/red_teaming_exps/simulation/plug_nominal.mov" type="video/mov">Your browser does not support the video tag.</video>
+                                </figure>
+                            </td>
+                            <td>
+                                <figure class="image">
+                                    <video controls preload="metadata" src="./assets/red_teaming_exps/simulation/drawer_nominal.mov" type="video/mov">Your browser does not support the video tag.</video>
+                                </figure>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>CrashShapes</strong></td>
+                            <td>
+                                <figure class="image">
+                                    <video controls preload="metadata" src="./assets/red_teaming_exps/simulation/mug_deformed.mov" type="video/mov">Your browser does not support the video tag.</video>
+                                </figure>
+                            </td>
+                            <td>
+                                <figure class="image">
+                                    <video controls preload="metadata" src="./assets/red_teaming_exps/simulation/plug_deformed.mov" type="video/mov">Your browser does not support the video tag.</video>
+                                </figure>
+                            </td>
+                            <td>
+                                <figure class="image">
+                                    <video controls preload="metadata" src="./assets/red_teaming_exps/simulation/drawer_deformed.mov" type="video/mov">Your browser does not support the video tag.</video>
+                                </figure>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
-  function typeWriter(txt, i, q, num, text1, text2) {
-      var imgText = document.getElementById(text1 + num);
-      var answer = document.getElementById(text2 + num);
-      if (imgText.innerHTML == q) {
-          for (let k = 0; k < 5; k++) {
-              if (i < txt.length) {
-                  if (txt.charAt(i) == "\\") {
-                      answer.innerHTML += "\n";
-                      i += 1;
-                  } else {
-                      answer.innerHTML += txt.charAt(i);
-                  }
-                  i++;
-              }
-          }
-          hljs.highlightAll();
-          timeoutIds.push(setTimeout(typeWriter, 1, txt, i, q, num, text1, text2));
-      }
-  }
+        </div>
+    </section>
 
-</script>
+    <section class="section vlm-prompting-strategy-section py-4">
+        <div class="container is-max-desktop">
+            <div class="heading has-text-centered" style="margin-bottom: 2rem;">
+                <h2 class="title is-3">VLM Prompting Strategy</h2>
+            </div>
+            
+            <figure class="image" style="margin-bottom: 1.5rem; display: block; margin-left: auto; margin-right: auto; max-width: 800px;">
+                <img src="./assets/figures/vlm_prompting_figure.png" alt="Diagram of the Two-stage VLM prompting strategy for 3D handle-point selection" style="max-height: 80vh; width: auto; max-width: 100%;">
+            </figure>
+            
+            <div class="content has-text-justified" style="margin-top: 1rem;">
+                <p class="is-size-6">
+                    <strong>Two-stage VLM prompting strategy for 3D handle-point selection.</strong> First, the Geometric Reasoning template aligns a canonical view-panel and indexed keypoints with a high-level task description, guiding the VLM to infer which vertices control meaningful mesh deformations. Next, the Task-Critical Ranking template asks the model to pareto-rank these candidates by plausibility and task relevance, producing a compact set of handle points for targeted, task-aware red-teaming.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section vlm-interactive-section">
+        <div class="container is-max-desktop">
+            <h2 class="title is-3 has-text-centered">VLM Prompting Examples</h2>
+    
+            <div class="field">
+                <label class="label">1. Select a Task:</label>
+                <div class="control">
+                    <div class="select is-fullwidth">
+                        <select id="vlm-task-select">
+                            <option value="">-- Choose a Task --</option>
+                            <option value="grasp">Red-Teaming a Grasping Policy</option>
+                            <option value="insert">Red-Teaming an Insertion Policy</option>
+                            <option value="articulation">Red-Teaming a Drawer Opening Policy</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="field" id="vlm-object-selection-area" style="display: none;">
+                <label class="label">2. Select an Object for <span id="selected-task-name-object-label" class="has-text-weight-normal">Task</span>:</label>
+                <div class="control">
+                    <div class="select is-fullwidth">
+                        <select id="vlm-object-select">
+                            <option value="">-- Choose an Object --</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+    
+            <div id="vlm-simulation-display-area" style="display: none; margin-top: 2rem;">
+                <div class="tabs is-centered is-boxed">
+                    <ul>
+                        <li class="is-active" id="tab-stage1"><a>Stage 1: Geometric Reasoning</a></li>
+                        <li id="tab-stage2"><a>Stage 2: Task-Critical Ranking</a></li>
+                    </ul>
+                </div>
+    
+                <div class="vlm-stage-content" id="content-stage1">
+                    <div class="columns is-variable is-1-mobile is-1-tablet is-1-desktop" style="margin-top: 1rem;">
+
+                        <div class="column is-5-desktop is-3-tablet"> <h4 class="title is-5 mb-2">VLM Input (Stage 1)</h4>
+                            <div class="box" id="s1-input-display" style="padding: 0.75rem;">
+                                <p class="has-text-weight-semibold is-size-6 mb-1">Canonical View Panel:</p>
+                                <figure class="image" style="margin-bottom: 0.75em; border: 1px solid #ddd; background-color:#f5f5f5;">
+                                    <img id="s1-canonical-view-panel-img" src="./assets/images/placeholder_4x3.png" alt="Canonical View Panel">
+                                </figure>
+                                
+                                <div class="scrollable-prompt-window">
+                                    <p class="has-text-weight-semibold is-size-6 mb-1">VLM PROMPT:</p>
+                                    <pre id="s1-prompt-text"></pre> 
+                                    
+                                    <p class="has-text-weight-semibold is-size-6 mt-2 mb-1">INPUT JSON:</p>
+                                    <pre><code id="s1-input-json-content" class="language-json"></code></pre>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="column is-12-desktop is-7-tablet">
+                            <h4 class="title is-5 mb-2">VLM Response (Stage 1)</h4>
+                            <div class="columns is-mobile is-gapless">
+                                <div class="column is-narrow" id="s1-vlm-output-thumbnails" style="width: 85px; display: flex; flex-direction: column; gap: 5px; margin-right: 10px; max-height:360px; overflow-y:auto; padding-right:5px;">
+                                    </div>
+                                <div class="column">
+                                    <figure class="image" style="margin-bottom: 0.5rem; border: 1px solid #dbdbdb; border-radius: 4px; background-color: #f5f5f5;">
+                                        <img id="s1-vlm-output-large-gif" src="./assets/gifs/placeholder_1x1.gif" alt="Selected VLM output hypothesis">
+                                    </figure>
+                                    <button class="button is-link is-outlined is-small is-fullwidth mt-2" id="view-s1-output-json-btn">
+                                        <span class="icon is-small"><i class="fas fa-code"></i></span>
+                                        <span>View Full Output JSON</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> <div class="vlm-stage-content" id="content-stage2" style="display: none;">
+                    <div class="columns" style="margin-top: 1rem;">
+                        <div class="column is-half"> 
+                            <h4 class="title is-5">VLM Input (Stage 2)</h4>
+                            <div class="box" id="stage2-input-prompt-area" style="padding: 1rem;">
+                                <p class="has-text-weight-semibold is-size-6 mb-1">VLM PROMPT:</p>
+                                <div id="stage2-full-prompt-display" class="content is-size-7 scrollable-prompt-window" style="max-height: 280px; white-space: pre-wrap; background-color: #f9f9f9; padding: 0.75em; border-radius: 4px; line-height: 1.5;">
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="column is-half"> 
+                             <h4 class="title is-5">VLM Response (Stage 2)</h4>
+                            <div class="box" id="stage2-response-display" style="padding: 1rem;">
+                               <figure class="image" style="margin-bottom: 0.5rem; border: 1px solid #dbdbdb; border-radius: 4px; background-color: #f5f5f5;">
+                                    <img id="s2-vlm-output-large-gif" src="./assets/gifs/placeholder_1x1.gif" alt="VLM output hypothesis for Stage 2">
+                                </figure>
+                               <button class="button is-link is-outlined is-small is-fullwidth mt-2" id="view-s2-output-json-btn">
+                                   <span class="icon is-small"><i class="fas fa-code"></i></span>
+                                   <span>View Output JSON (Stage 2)</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div> </div> <div class="modal" id="json-display-modal">
+              <div class="modal-background"></div>
+              <div class="modal-card">
+                <header class="modal-card-head">
+                  <p class="modal-card-title" id="json-modal-title">JSON Content</p>
+                  <button class="delete" aria-label="close"></button>
+                </header>
+                <section class="modal-card-body">
+                  <pre><code id="json-modal-content" class="language-json" style="font-size: 0.8rem;"></code></pre>
+                </section>
+              </div>
+            </div> </div>
+    </section>
+    <section class="section real-world-validation-section pt-2">
+        <div class="container is-max-desktop">
+            <h2 class="title is-3 has-text-centered">Real World Validation</h2>
+            <p class="subtitle is-5 has-text-justified" style="margin-bottom: 1rem;"> We tested our framework on a physical xARM 6 robot using 3D-printed plugs (Nominal, CS-1, CS-2). The following videos demonstrate the effectiveness of red-teaming in identifying failures and blue-teaming in enhancing policy robustness.
+            </p>
+            <p class="has-text-justified" style="margin-bottom: 2.5rem; font-style: italic;">
+                <small>Tip: Select a thumbnail from the video strips to play the trial in the larger window.</small>
+            </p>
+
+            <div class="scenario">
+                <h3 class="title is-4">1. Baseline: Original Policy with Nominal Plug</h3>
+                <p class="scenario-summary content">The pre-trained policy consistently succeeds with the standard, undeformed object.</p>
+                <div class="lead-video-player-wrapper">
+                    <video id="nominal-original-lead-video" src="./assets/red_teaming_exps/pretrained_normal/pretrained_normal_trial_1.mp4" controls preload="auto"></video>
+                </div>
+                <div class="video-thumbnail-strip" id="nominal-original-thumbs">
+                    <div class="thumbnail-video-wrapper" data-video-src="./assets/red_teaming_exps/pretrained_normal/pretrained_normal_trial_1.mp4" data-outcome="success">
+                        <video class="thumbnail-video" src="./assets/red_teaming_exps/pretrained_normal/pretrained_normal_trial_1.mp4" muted preload="metadata" playsinline></video>
+                        <div class="outcome-indicator"><i class="fas fa-check-circle"></i></div>
+                    </div>
+                    <div class="thumbnail-video-wrapper" data-video-src="./assets/red_teaming_exps/pretrained_normal/pretrained_normal_trial_3.mp4" data-outcome="success">
+                        <video class="thumbnail-video" src="./assets/red_teaming_exps/pretrained_normal/pretrained_normal_trial_3.mp4" muted preload="metadata" playsinline></video>
+                        <div class="outcome-indicator"><i class="fas fa-check-circle"></i></div>
+                    </div>
+                    <div class="thumbnail-video-wrapper" data-video-src="./assets/red_teaming_exps/pretrained_normal/pretrained_normal_trial_6.mp4" data-outcome="success">
+                        <video class="thumbnail-video" src="./assets/red_teaming_exps/pretrained_normal/pretrained_normal_trial_6.mp4" muted preload="metadata" playsinline></video>
+                        <div class="outcome-indicator"><i class="fas fa-check-circle"></i></div>
+                    </div>
+                    <div class="thumbnail-video-wrapper" data-video-src="./assets/red_teaming_exps/pretrained_normal/pretrained_normal_trial_9.mp4" data-outcome="success">
+                        <video class="thumbnail-video" src="./assets/red_teaming_exps/pretrained_normal/pretrained_normal_trial_9.mp4" muted preload="metadata" playsinline></video>
+                        <div class="outcome-indicator"><i class="fas fa-check-circle"></i></div>
+                    </div>
+                    <div class="thumbnail-video-wrapper" data-video-src="./assets/red_teaming_exps/pretrained_normal/pretrained_normal_trial_15.mp4" data-outcome="success">
+                        <video class="thumbnail-video" src="./assets/red_teaming_exps/pretrained_normal/pretrained_normal_trial_15.mp4" muted preload="metadata" playsinline></video>
+                        <div class="outcome-indicator"><i class="fas fa-check-circle"></i></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scenario">
+                <h3 class="title is-4">2. Red Teaming: Original Policy Fails on CrashShape CS-1</h3>
+                <p class="scenario-summary content">The same policy consistently fails when presented with CrashShape CS-1.</p>
+                <div class="lead-video-player-wrapper">
+                    <video id="cs1-original-lead-video" src="./assets/red_teaming_exps/pretrained_deform1/pretrained_deform1_trial_1.mp4" controls preload="auto"></video>
+                </div>
+                <div class="video-thumbnail-strip" id="cs1-original-thumbs">
+                    <div class="thumbnail-video-wrapper" data-video-src="./assets/red_teaming_exps/pretrained_deform1/pretrained_deform1_trial_1.mp4" data-outcome="failure">
+                        <video class="thumbnail-video" src="./assets/red_teaming_exps/pretrained_deform1/pretrained_deform1_trial_1.mp4" muted preload="metadata" playsinline></video>
+                        <div class="outcome-indicator"><i class="fas fa-times-circle"></i></div>
+                    </div>
+                    <div class="thumbnail-video-wrapper" data-video-src="./assets/red_teaming_exps/pretrained_deform1/pretrained_deform1_trial_3.mp4" data-outcome="success"> <video class="thumbnail-video" src="./assets/red_teaming_exps/pretrained_deform1/pretrained_deform1_trial_3.mp4" muted preload="metadata" playsinline></video>
+                        <div class="outcome-indicator"><i class="fas fa-check-circle"></i></div>
+                    </div>
+                    <div class="thumbnail-video-wrapper" data-video-src="./assets/red_teaming_exps/pretrained_deform1/pretrained_deform1_trial_2.mp4" data-outcome="failure">
+                        <video class="thumbnail-video" src="./assets/red_teaming_exps/pretrained_deform1/pretrained_deform1_trial_2.mp4" muted preload="metadata" playsinline></video>
+                        <div class="outcome-indicator"><i class="fas fa-times-circle"></i></div>
+                    </div>
+                    <div class="thumbnail-video-wrapper" data-video-src="./assets/red_teaming_exps/pretrained_deform1/pretrained_deform1_trial_19.mp4" data-outcome="failure">
+                        <video class="thumbnail-video" src="./assets/red_teaming_exps/pretrained_deform1/pretrained_deform1_trial_19.mp4" muted preload="metadata" playsinline></video>
+                        <div class="outcome-indicator"><i class="fas fa-times-circle"></i></div>
+                    </div>
+                    <div class="thumbnail-video-wrapper" data-video-src="./assets/red_teaming_exps/pretrained_deform1/pretrained_deform1_trial_5.mp4" data-outcome="failure">
+                        <video class="thumbnail-video" src="./assets/red_teaming_exps/pretrained_deform1/pretrained_deform1_trial_5.mp4" muted preload="metadata" playsinline></video>
+                        <div class="outcome-indicator"><i class="fas fa-times-circle"></i></div>
+                    </div>
+                    </div>
+            </div>
+
+            <div class="scenario">
+                <h3 class="title is-4">3. Red Teaming: Original Policy Fails on CrashShape CS-2</h3>
+                <p class="scenario-summary content">The policy also consistently fails when presented with CrashShape CS-2.</p>
+                <div class="lead-video-player-wrapper">
+                    <video id="cs2-original-lead-video" src="./assets/red_teaming_exps/pretrained_deform2/pretrained_deform2_trial_2.mp4" controls preload="auto"></video>
+                </div>
+                <div class="video-thumbnail-strip" id="cs2-original-thumbs">
+                    <div class="thumbnail-video-wrapper" data-video-src="./assets/red_teaming_exps/pretrained_deform2/pretrained_deform2_trial_2.mp4" data-outcome="failure">
+                        <video class="thumbnail-video" src="./assets/red_teaming_exps/pretrained_deform2/pretrained_deform2_trial_2.mp4" muted preload="metadata" playsinline></video>
+                        <div class="outcome-indicator"><i class="fas fa-times-circle"></i></div>
+                    </div>
+                    <div class="thumbnail-video-wrapper" data-video-src="./assets/red_teaming_exps/pretrained_deform2/pretrained_deform2_trial_1.mp4" data-outcome="success"> <video class="thumbnail-video" src="./assets/red_teaming_exps/pretrained_deform2/pretrained_deform2_trial_1.mp4" muted preload="metadata" playsinline></video>
+                        <div class="outcome-indicator"><i class="fas fa-check-circle"></i></div>
+                    </div>
+                    <div class="thumbnail-video-wrapper" data-video-src="./assets/red_teaming_exps/pretrained_deform2/pretrained_deform2_trial_9.mp4" data-outcome="failure">
+                        <video class="thumbnail-video" src="./assets/red_teaming_exps/pretrained_deform2/pretrained_deform2_trial_9.mp4" muted preload="metadata" playsinline></video>
+                        <div class="outcome-indicator"><i class="fas fa-times-circle"></i></div>
+                    </div>
+                    <div class="thumbnail-video-wrapper" data-video-src="./assets/red_teaming_exps/pretrained_deform2/pretrained_deform2_trial_19.mp4" data-outcome="success"> <video class="thumbnail-video" src="./assets/red_teaming_exps/pretrained_deform2/pretrained_deform2_trial_19.mp4" muted preload="metadata" playsinline></video>
+                        <div class="outcome-indicator"><i class="fas fa-check-circle"></i></div>
+                    </div>
+                    <div class="thumbnail-video-wrapper" data-video-src="./assets/red_teaming_exps/pretrained_deform2/pretrained_deform2_trial_12.mp4" data-outcome="failure">
+                        <video class="thumbnail-video" src="./assets/red_teaming_exps/pretrained_deform2/pretrained_deform2_trial_12.mp4" muted preload="metadata" playsinline></video>
+                        <div class="outcome-indicator"><i class="fas fa-times-circle"></i></div>
+                    </div>
+                    </div>
+            </div>
+            
+            <div class="scenario">
+                <h3 class="title is-4">4. Blue Teaming on CrashShape CS-1</h3>
+                <p class="scenario-summary content">A policy was fine-tuned using CS-1 and the nominal plug. It was then evaluated on both shapes.</p>
+
+                <div class="sub-scenario">
+                    <h4 class="title is-5">Performance on CS-1 (with CS-1 Blue-Teamed Policy)</h4>
+                    <p class="scenario-summary content">The blue-teamed policy now consistently succeeds on CS-1.</p>
+                    <div class="lead-video-player-wrapper">
+                        <video id="cs1-blue-on-cs1-lead-video" src="./assets/red_teaming_exps/blue_1_deform1/blue_1_deform1_trial_1.mp4" controls preload="auto"></video>
+                    </div>
+                    <div class="video-thumbnail-strip" id="cs1-blue-on-cs1-thumbs">
+                        <div class="thumbnail-video-wrapper" data-video-src="./assets/red_teaming_exps/blue_1_deform1/blue_1_deform1_trial_1.mp4" data-outcome="success">
+                            <video class="thumbnail-video" src="./assets/red_teaming_exps/blue_1_deform1/blue_1_deform1_trial_1.mp4" muted preload="metadata" playsinline></video>
+                            <div class="outcome-indicator"><i class="fas fa-check-circle"></i></div>
+                        </div>
+                        <div class="thumbnail-video-wrapper" data-video-src="./assets/red_teaming_exps/blue_1_deform1/blue_1_deform1_trial_6.mp4" data-outcome="success">
+                            <video class="thumbnail-video" src="./assets/red_teaming_exps/blue_1_deform1/blue_1_deform1_trial_6.mp4" muted preload="metadata" playsinline></video>
+                            <div class="outcome-indicator"><i class="fas fa-check-circle"></i></div>
+                        </div>
+                        <div class="thumbnail-video-wrapper" data-video-src="./assets/red_teaming_exps/blue_1_deform1/blue_1_deform1_trial_3.mp4" data-outcome="success">
+                            <video class="thumbnail-video" src="./assets/red_teaming_exps/blue_1_deform1/blue_1_deform1_trial_3.mp4" muted preload="metadata" playsinline></video>
+                            <div class="outcome-indicator"><i class="fas fa-check-circle"></i></div>
+                        </div>
+                        <div class="thumbnail-video-wrapper" data-video-src="./assets/red_teaming_exps/blue_1_deform1/blue_1_deform1_trial_4.mp4" data-outcome="success">
+                            <video class="thumbnail-video" src="./assets/red_teaming_exps/blue_1_deform1/blue_1_deform1_trial_4.mp4" muted preload="metadata" playsinline></video>
+                            <div class="outcome-indicator"><i class="fas fa-check-circle"></i></div>
+                        </div>
+                        <div class="thumbnail-video-wrapper" data-video-src="./assets/red_teaming_exps/blue_1_deform1/blue_1_deform1_trial_5.mp4" data-outcome="success">
+                            <video class="thumbnail-video" src="./assets/red_teaming_exps/blue_1_deform1/blue_1_deform1_trial_5.mp4" muted preload="metadata" playsinline></video>
+                            <div class="outcome-indicator"><i class="fas fa-check-circle"></i></div>
+                        </div>
+                        </div>
+                </div>
+                <br>
+                <div class="sub-scenario">
+                    <h4 class="title is-5">Performance on Nominal Plug (with CS-1 Blue-Teamed Policy)</h4>
+                    <p class="scenario-summary content">Performance on the nominal plug is preserved.</p>
+                    <div class="lead-video-player-wrapper">
+                        <video id="cs1-blue-on-nominal-lead-video" src="./assets/red_teaming_exps/blue_1_normal/blue_1_normal_trial_1.mp4" controls preload="auto"></video>
+                    </div>
+                    <div class="video-thumbnail-strip" id="cs1-blue-on-nominal-thumbs">
+                        <div class="thumbnail-video-wrapper" data-video-src="./assets/red_teaming_exps/blue_1_normal/blue_1_normal_trial_1.mp4" data-outcome="success">
+                            <video class="thumbnail-video" src="./assets/red_teaming_exps/blue_1_normal/blue_1_normal_trial_1.mp4" muted preload="metadata" playsinline></video>
+                            <div class="outcome-indicator"><i class="fas fa-check-circle"></i></div>
+                        </div>
+                        <div class="thumbnail-video-wrapper" data-video-src="./assets/red_teaming_exps/blue_1_normal/blue_1_normal_trial_2.mp4" data-outcome="success">
+                            <video class="thumbnail-video" src="./assets/red_teaming_exps/blue_1_normal/blue_1_normal_trial_2.mp4" muted preload="metadata" playsinline></video>
+                            <div class="outcome-indicator"><i class="fas fa-check-circle"></i></div>
+                        </div>
+                        <div class="thumbnail-video-wrapper" data-video-src="./assets/red_teaming_exps/blue_1_normal/blue_1_normal_trial_3.mp4" data-outcome="success">
+                            <video class="thumbnail-video" src="./assets/red_teaming_exps/blue_1_normal/blue_1_normal_trial_3.mp4" muted preload="metadata" playsinline></video>
+                            <div class="outcome-indicator"><i class="fas fa-check-circle"></i></div>
+                        </div>
+                        <div class="thumbnail-video-wrapper" data-video-src="./assets/red_teaming_exps/blue_1_normal/blue_1_normal_trial_4.mp4" data-outcome="success">
+                            <video class="thumbnail-video" src="./assets/red_teaming_exps/blue_1_normal/blue_1_normal_trial_4.mp4" muted preload="metadata" playsinline></video>
+                            <div class="outcome-indicator"><i class="fas fa-check-circle"></i></div>
+                        </div>
+                        <div class="thumbnail-video-wrapper" data-video-src="./assets/red_teaming_exps/blue_1_normal/blue_1_normal_trial_5.mp4" data-outcome="success">
+                            <video class="thumbnail-video" src="./assets/red_teaming_exps/blue_1_normal/blue_1_normal_trial_5.mp4" muted preload="metadata" playsinline></video>
+                            <div class="outcome-indicator"><i class="fas fa-check-circle"></i></div>
+                        </div>
+                        </div>
+                </div>
+            </div>
+
+            <div class="scenario">
+                <h3 class="title is-4">5. Blue Teaming on CrashShape CS-2</h3>
+                <p class="scenario-summary content">A separate policy was fine-tuned using CS-2 and the nominal plug, then evaluated.</p>
+                
+                <div class="sub-scenario">
+                    <h4 class="title is-5">Performance on CS-2 (with CS-2 Blue-Teamed Policy)</h4>
+                    <p class="scenario-summary content">This blue-teamed policy now consistently succeeds on CS-2.</p>
+                        <div class="lead-video-player-wrapper">
+                            <video id="cs2-blue-on-cs2-lead-video" src="./assets/red_teaming_exps/blue_2_deform2/blue_2_deform2_trial_1.mp4" controls preload="auto"></video>
+                        </div>
+                        <div class="video-thumbnail-strip" id="cs2-blue-on-cs2-thumbs">
+                            <div class="thumbnail-video-wrapper" data-video-src="./assets/red_teaming_exps/blue_2_deform2/blue_2_deform2_trial_1.mp4" data-outcome="success">
+                                <video class="thumbnail-video" src="./assets/red_teaming_exps/blue_2_deform2/blue_2_deform2_trial_1.mp4" muted preload="metadata" playsinline></video>
+                                <div class="outcome-indicator"><i class="fas fa-check-circle"></i></div>
+                            </div>
+                            <div class="thumbnail-video-wrapper" data-video-src="./assets/red_teaming_exps/blue_2_deform2/blue_2_deform2_trial_6.mp4" data-outcome="success">
+                                <video class="thumbnail-video" src="./assets/red_teaming_exps/blue_2_deform2/blue_2_deform2_trial_6.mp4" muted preload="metadata" playsinline></video>
+                                <div class="outcome-indicator"><i class="fas fa-check-circle"></i></div>
+                            </div>
+                            <div class="thumbnail-video-wrapper" data-video-src="./assets/red_teaming_exps/blue_2_deform2/blue_2_deform2_trial_3.mp4" data-outcome="success">
+                                <video class="thumbnail-video" src="./assets/red_teaming_exps/blue_2_deform2/blue_2_deform2_trial_3.mp4" muted preload="metadata" playsinline></video>
+                                <div class="outcome-indicator"><i class="fas fa-check-circle"></i></div>
+                            </div>
+                            <div class="thumbnail-video-wrapper" data-video-src="./assets/red_teaming_exps/blue_2_deform2/blue_2_deform2_trial_4.mp4" data-outcome="success">
+                                <video class="thumbnail-video" src="./assets/red_teaming_exps/blue_2_deform2/blue_2_deform2_trial_4.mp4" muted preload="metadata" playsinline></video>
+                                <div class="outcome-indicator"><i class="fas fa-check-circle"></i></div>
+                            </div>
+                            <div class="thumbnail-video-wrapper" data-video-src="./assets/red_teaming_exps/blue_2_deform2/blue_2_deform2_trial_5.mp4" data-outcome="success">
+                                <video class="thumbnail-video" src="./assets/red_teaming_exps/blue_2_deform2/blue_2_deform2_trial_5.mp4" muted preload="metadata" playsinline></video>
+                                <div class="outcome-indicator"><i class="fas fa-check-circle"></i></div>
+                            </div>
+                            </div>
+                </div>
+                <br>
+                <div class="sub-scenario">
+                    <h4 class="title is-5">Performance on Nominal Plug (with CS-2 Blue-Teamed Policy)</h4>
+                    <p class="scenario-summary content">Performance on the nominal plug is also preserved with this policy.</p>
+                    <div class="lead-video-player-wrapper">
+                        <video id="cs2-blue-on-nominal-lead-video" src="./assets/red_teaming_exps/blue_2_normal/blue_2_normal_trial_1.mp4" controls preload="auto"></video>
+                    </div>
+                    <div class="video-thumbnail-strip" id="cs2-blue-on-nominal-thumbs">
+                        <div class="thumbnail-video-wrapper" data-video-src="./assets/red_teaming_exps/blue_2_normal/blue_2_normal_trial_1.mp4" data-outcome="success">
+                            <video class="thumbnail-video" src="./assets/red_teaming_exps/blue_2_normal/blue_2_normal_trial_1.mp4" muted preload="metadata" playsinline></video>
+                            <div class="outcome-indicator"><i class="fas fa-check-circle"></i></div>
+                        </div>
+                        <div class="thumbnail-video-wrapper" data-video-src="./assets/red_teaming_exps/blue_2_normal/blue_2_normal_trial_6.mp4" data-outcome="success"> <video class="thumbnail-video" src="./assets/red_teaming_exps/blue_2_normal/blue_2_normal_trial_6.mp4" muted preload="metadata" playsinline></video>
+                            <div class="outcome-indicator"><i class="fas fa-check-circle"></i></div>
+                        </div>
+                        <div class="thumbnail-video-wrapper" data-video-src="./assets/red_teaming_exps/blue_2_normal/blue_2_normal_trial_3.mp4" data-outcome="success">
+                            <video class="thumbnail-video" src="./assets/red_teaming_exps/blue_2_normal/blue_2_normal_trial_3.mp4" muted preload="metadata" playsinline></video>
+                            <div class="outcome-indicator"><i class="fas fa-check-circle"></i></div>
+                        </div>
+                        <div class="thumbnail-video-wrapper" data-video-src="./assets/red_teaming_exps/blue_2_normal/blue_2_normal_trial_4.mp4" data-outcome="success">
+                            <video class="thumbnail-video" src="./assets/red_teaming_exps/blue_2_normal/blue_2_normal_trial_4.mp4" muted preload="metadata" playsinline></video>
+                            <div class="outcome-indicator"><i class="fas fa-check-circle"></i></div>
+                        </div>
+                        <div class="thumbnail-video-wrapper" data-video-src="./assets/red_teaming_exps/blue_2_normal/blue_2_normal_trial_5.mp4" data-outcome="success"> <video class="thumbnail-video" src="./assets/red_teaming_exps/blue_2_normal/blue_2_normal_trial_5.mp4" muted preload="metadata" playsinline></video>
+                            <div class="outcome-indicator"><i class="fas fa-check-circle"></i></div>
+                        </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    </body>
+
+    <script>
+        // Static VLM Prompt Text for Stage 1
+        const STAGE1_VLM_PROMPT_TEXT = `High-level Task: Deformation of a 3D mesh object via key point manipulation.
+    
+    Index:
+    1. Handle Points -- Mesh vertices which serve as keypoints to be displaced for the purposes of mesh deformation.
+    2. Anchor Points -- Mesh vertices which remain in place through the deformation process.
+    3. Displacement Vectors -- Directional displacements of handle points for the purposes of mesh deformation.
+    
+    Method: Jacobian field optimization by means of a Poisson solver over the entire mesh under the constraints imposed by the deformation parameters.
+    
+    Input:
+    1. Images containing multiple canonical views of the object under inspection, annotated with keypoints sampled on the object's surface.
+    2. A JSON file containing the 3D location of the object in the world coordinates.
+    
+    Objective: Provide multiple subsets of keypoints to serve as handle points for the deformation process, along with a single line description of the transformations one can hope to achieve using those handle points.
+    
+    Hints: 
+    1. The multiple annotated views of the underlying object, along with the 3D world frame positions of the keypoints, can be used to localize the keypoints and reason about the type and structure of the object.
+    2. Deformations that yield realistic objects often maintain symmetry across the key axes of symmetry.
+    
+    Penalty: 
+    You'll lose points if the returned output contains any content other than requested output.`;
+    
+        // NEW: Static VLM Prompt Template for Stage 2
+        const STAGE2_VLM_PROMPT_TEMPLATE = `[Chat History]
+    Rank the deformations using pareto-optimality in your reasoning. The objectives of interest at the end of the deformation process, ranked in order of priority, are:
+    
+    1. Existence of similar objects in the real world.
+    2. Handle point placements that provide a good avenue for<task description>.
+    
+    Objective: Return a single json file containing the information on the highest ranking subset.
+    
+    Penalty: You'll lose points if the returned output contains any content other than requested output.`;
+    
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- START: VLM Interactive Simulation JS ---
+            const vlmSimulationData = {
+                "grasp": {
+                    taskDisplayName: "Red-Teaming a Grasping Policy",
+                    // Example: This description will be inserted into the STAGE2_VLM_PROMPT_TEMPLATE
+                    taskDescriptionForStage2: " red-teaming a grasping policy.",
+                    objects: {
+                        "mug": { 
+                            objectDisplayName: "Mug",
+                            originalObjectGifPath: "./assets/grasp/025_mug/mesh.gif",
+                            canonicalViewPanelImagePath: "./assets/grasp/025_mug/images/prompt_input.png",
+                            stage1_inputJsonPath: "./assets/grasp/025_mug/025_mug.json",
+                            stage1_vlmResponseJsonPath: "./assets/grasp/025_mug/vlm_responses/first_response.json",
+                            stage1_resultGifPath: "./assets/grasp/025_mug/first.gif",
+                            stage2_rawVlmOutputJsonPath: "./assets/grasp/025_mug/vlm_responses/second_response.json",
+                            stage2_resultGifPath: "./assets/grasp/025_mug/second.gif"
+                        },
+                        "box": { 
+                            objectDisplayName: "Box",
+                            originalObjectGifPath: "./assets/grasp/004_sugar_box/mesh.gif",
+                            canonicalViewPanelImagePath: "./assets/grasp/004_sugar_box/images/prompt_input.png",
+                            stage1_inputJsonPath: "./assets/grasp/004_sugar_box/004_sugar_box.json",
+                            stage1_vlmResponseJsonPath: "./assets/grasp/004_sugar_box/vlm_responses/first_response.json",
+                            stage1_resultGifPath: "./assets/grasp/004_sugar_box/first.gif",
+                            stage2_rawVlmOutputJsonPath: "./assets/grasp/004_sugar_box/vlm_responses/second_response.json",
+                            stage2_resultGifPath: "./assets/grasp/004_sugar_box/second.gif"
+                        },
+                        "mustard_bottle": { 
+                            objectDisplayName: "Mustard Bottle",
+                            originalObjectGifPath: "./assets/grasp/006_mustard_bottle/mesh.gif",
+                            canonicalViewPanelImagePath: "./assets/grasp/006_mustard_bottle/images/prompt_input.png",
+                            stage1_inputJsonPath: "./assets/grasp/006_mustard_bottle/006_mustard_bottle.json",
+                            stage1_vlmResponseJsonPath: "./assets/grasp/006_mustard_bottle/vlm_responses/first_response.json",
+                            stage1_resultGifPath: "./assets/grasp/006_mustard_bottle/first.gif",
+                            stage2_rawVlmOutputJsonPath: "./assets/grasp/006_mustard_bottle/vlm_responses/second_response.json",
+                            stage2_resultGifPath: "./assets/grasp/006_mustard_bottle/second.gif"
+                        },
+                        "bowl": { 
+                            objectDisplayName: "Bowl",
+                            originalObjectGifPath: "./assets/grasp/024_bowl/mesh.gif",
+                            canonicalViewPanelImagePath: "./assets/grasp/024_bowl/images/prompt_input.png",
+                            stage1_inputJsonPath: "./assets/grasp/024_bowl/024_bowl.json",
+                            stage1_vlmResponseJsonPath: "./assets/grasp/024_bowl/vlm_responses/first_response.json",
+                            stage1_resultGifPath: "./assets/grasp/024_bowl/first.gif",
+                            stage2_rawVlmOutputJsonPath: "./assets/grasp/024_bowl/vlm_responses/second_response.json",
+                            stage2_resultGifPath: "./assets/grasp/024_bowl/second.gif"
+                        },
+                        "spoon": { 
+                            objectDisplayName: "Spoon",
+                            originalObjectGifPath: "./assets/grasp/031_spoon/mesh.gif",
+                            canonicalViewPanelImagePath: "./assets/grasp/031_spoon/images/prompt_input.png",
+                            stage1_inputJsonPath: "./assets/grasp/031_spoon/031_spoon.json",
+                            stage1_vlmResponseJsonPath: "./assets/grasp/031_spoon/vlm_responses/first_response.json",
+                            stage1_resultGifPath: "./assets/grasp/031_spoon/first.gif",
+                            stage2_rawVlmOutputJsonPath: "./assets/grasp/031_spoon/vlm_responses/second_response.json",
+                            stage2_resultGifPath: "./assets/grasp/031_spoon/second.gif"
+                        },
+                    }
+                },
+                "insert": {
+                    taskDisplayName: "Red-Teaming an Insertion Policy",
+                    taskDescriptionForStage2: " red-teaming an insertion policy",
+                    objects: {
+                        "usb_plug": { 
+                            objectDisplayName: "USB Plug",
+                            originalObjectGifPath: "./assets/insert/industreal_usb_plug/mesh.gif",
+                            canonicalViewPanelImagePath: "./assets/insert/industreal_usb_plug/images/prompt_input.png",
+                            stage1_inputJsonPath: "./assets/insert/industreal_usb_plug/industreal_usb_plug.json",
+                            stage1_vlmResponseJsonPath: "./assets/insert/industreal_usb_plug/vlm_responses/first_response.json",
+                            stage1_resultGifPath: "./assets/insert/industreal_usb_plug/first.gif",
+                            stage2_rawVlmOutputJsonPath: "./assets/insert/industreal_usb_plug/vlm_responses/second_response.json",
+                            stage2_resultGifPath: "./assets/insert/industreal_usb_plug/second.gif"
+                        }
+                    }
+                },
+                 "articulation": {
+                    taskDisplayName: "Red-Teaming a Drawer Opening Policy",
+                    taskDescriptionForStage2: " red-teaming a drawer opening policy",
+                    objects: {
+                        "handle": { 
+                            objectDisplayName: "Drawer Handle",
+                            originalObjectGifPath: "./assets/articulation/drawer_handle/mesh.gif",
+                            canonicalViewPanelImagePath: "./assets/articulation/drawer_handle/images/prompt_input.png",
+                            stage1_inputJsonPath: "./assets/articulation/drawer_handle/drawer_handle.json",
+                            stage1_vlmResponseJsonPath: "./assets/articulation/drawer_handle/vlm_responses/first_response.json",
+                            stage1_resultGifPath: "./assets/articulation/drawer_handle/first.gif",
+                            stage2_rawVlmOutputJsonPath: "./assets/articulation/drawer_handle/vlm_responses/second_response.json",
+                            stage2_resultGifPath: "./assets/articulation/drawer_handle/second.gif"
+                        }
+                    }
+                }
+            };
+    
+            const vlmTaskSelect = document.getElementById('vlm-task-select');
+            const vlmObjectSelectArea = document.getElementById('vlm-object-selection-area');
+            const vlmObjectSelect = document.getElementById('vlm-object-select');
+            const selectedTaskNameObjectLabel = document.getElementById('selected-task-name-object-label');
+            const vlmSimulationDisplayArea = document.getElementById('vlm-simulation-display-area');
+    
+            const tabStage1 = document.getElementById('tab-stage1');
+            const tabStage2 = document.getElementById('tab-stage2');
+            const contentStage1 = document.getElementById('content-stage1');
+            const contentStage2 = document.getElementById('content-stage2');
+    
+            // Stage 1 Elements
+            const s1PromptTextEl = document.getElementById('s1-prompt-text');
+            const s1OriginalObjectGif = document.getElementById('s1-original-object-gif');
+            const s1CanonicalViewPanelImg = document.getElementById('s1-canonical-view-panel-img');
+            const s1InputJsonContentEl = document.getElementById('s1-input-json-content');
+            const s1OutputThumbnailsContainer = document.getElementById('s1-vlm-output-thumbnails');
+            const s1VlmOutputLargeGif = document.getElementById('s1-vlm-output-large-gif');
+            const s1OutputSemanticLabelEl = document.getElementById('s1-vlm-output-semantic-label');
+            const s1OutputExpectedTransformEl = document.getElementById('s1-vlm-output-expected-transform');
+            const viewS1OutputJsonBtn = document.getElementById('view-s1-output-json-btn');
+            
+            // Stage 2 Elements
+            const stage2FullPromptDisplayEl = document.getElementById('stage2-full-prompt-display');
+            const stage2RankingRationaleEl = document.getElementById('stage2-ranking-rationale');
+            const s2VlmOutputLargeGif = document.getElementById('s2-vlm-output-large-gif');
+            const viewS2OutputJsonBtn = document.getElementById('view-s2-output-json-btn');
+    
+            const jsonDisplayModal = document.getElementById('json-display-modal');
+            const jsonModalTitle = document.getElementById('json-modal-title');
+            const jsonModalContent = document.getElementById('json-modal-content');
+            
+            let currentSelectedTaskKey = null;
+            let currentSelectedObjectKey = null;
+            let currentActiveStage = 'stage1';
+            let currentVLMResponseJsons = { stage1: null, stage2: null };
+    
+            vlmTaskSelect.addEventListener('change', function() {
+                currentSelectedTaskKey = this.value;
+                vlmObjectSelect.innerHTML = '<option value="">-- Choose an Object --</option>';
+                vlmSimulationDisplayArea.style.display = 'none';
+                currentSelectedObjectKey = null;
+                currentVLMResponseJsons = { stage1: null, stage2: null }; 
+    
+                if (currentSelectedTaskKey && vlmSimulationData[currentSelectedTaskKey]) {
+                    selectedTaskNameObjectLabel.textContent = vlmSimulationData[currentSelectedTaskKey].taskDisplayName;
+                    const objects = vlmSimulationData[currentSelectedTaskKey].objects;
+                    for (const objKey in objects) {
+                        const option = document.createElement('option');
+                        option.value = objKey;
+                        option.textContent = objects[objKey].objectDisplayName;
+                        vlmObjectSelect.appendChild(option);
+                    }
+                    vlmObjectSelectArea.style.display = 'block';
+                } else {
+                    vlmObjectSelectArea.style.display = 'none';
+                }
+            });
+    
+            vlmObjectSelect.addEventListener('change', function() {
+                currentSelectedObjectKey = this.value;
+                currentVLMResponseJsons = { stage1: null, stage2: null }; 
+                if (currentSelectedObjectKey) {
+                    vlmSimulationDisplayArea.style.display = 'block';
+                    showVLMStage('stage1'); 
+                } else {
+                    vlmSimulationDisplayArea.style.display = 'none';
+                }
+            });
+            
+            tabStage1.addEventListener('click', () => showVLMStage('stage1'));
+            tabStage2.addEventListener('click', () => showVLMStage('stage2'));
+    
+            jsonDisplayModal.querySelector('.modal-background').addEventListener('click', () => {
+                jsonDisplayModal.classList.remove('is-active');
+            });
+            jsonDisplayModal.querySelector('.delete').addEventListener('click', () => {
+                jsonDisplayModal.classList.remove('is-active');
+            });
+            
+            async function fetchJson(filePath) {
+                if (!filePath) {
+                    console.warn("fetchJson called with no filePath.");
+                    return null;
+                }
+                try {
+                    const response = await fetch(filePath);
+                    if (!response.ok) {
+                        console.error(`HTTP error! status: ${response.status} for ${filePath}`);
+                        return null;
+                    }
+                    const jsonData = await response.json();
+                    return jsonData;
+                } catch (e) {
+                    console.error(`Error fetching or parsing JSON from ${filePath}:`, e);
+                    return null;
+                }
+            }
+    
+            function displayJsonInModal(title, jsonData) {
+                jsonModalTitle.textContent = title;
+                let jsonString = "Error: Data is not valid JSON or not available.";
+                if (jsonData !== null && jsonData !== undefined) {
+                    try {
+                        jsonString = JSON.stringify(jsonData, null, 2);
+                    } catch (e) {
+                        console.error("Error stringifying JSON for modal:", e);
+                        jsonString = "Error displaying JSON data. See console for details.";
+                    }
+                } else {
+                     jsonString = "No JSON data available to display.";
+                }
+                
+                const codeElement = jsonDisplayModal.querySelector('#json-modal-content');
+                if (codeElement) {
+                     codeElement.textContent = jsonString;
+                     if (typeof hljs !== 'undefined' && jsonData) {
+                        hljs.highlightElement(codeElement);
+                    }
+                }
+                jsonDisplayModal.classList.add('is-active');
+            }
+    
+            window.showVLMStage = function(stageId) { 
+                currentActiveStage = stageId;
+                if (stageId === 'stage1') {
+                    tabStage1.classList.add('is-active');
+                    tabStage2.classList.remove('is-active');
+                    contentStage1.style.display = 'block';
+                    contentStage2.style.display = 'none';
+                } else { 
+                    tabStage1.classList.remove('is-active');
+                    tabStage2.classList.add('is-active');
+                    contentStage1.style.display = 'none';
+                    contentStage2.style.display = 'block';
+                }
+                loadStageContent();
+            }
+    
+            async function loadStageContent() {
+                if (!currentSelectedTaskKey || !currentSelectedObjectKey || 
+                    !vlmSimulationData[currentSelectedTaskKey] || !vlmSimulationData[currentSelectedTaskKey].objects[currentSelectedObjectKey]) {
+                    console.warn("Task or object not selected, or data missing for loadStageContent.");
+                    return;
+                }
+    
+                const taskData = vlmSimulationData[currentSelectedTaskKey];
+                const objectConfig = taskData.objects[currentSelectedObjectKey];
+                
+                if (s1PromptTextEl) s1PromptTextEl.textContent = STAGE1_VLM_PROMPT_TEXT;
+    
+                if (currentActiveStage === 'stage1') {
+                    if (s1OriginalObjectGif) {
+                        s1OriginalObjectGif.src = objectConfig.originalObjectGifPath || "./assets/gifs/placeholder_1x1.gif";
+                        s1OriginalObjectGif.alt = `Turntable of original ${objectConfig.objectDisplayName}`;
+                    }
+                    if (s1CanonicalViewPanelImg) {
+                        s1CanonicalViewPanelImg.src = objectConfig.canonicalViewPanelImagePath || "./assets/images/placeholder_4x3.png";
+                        s1CanonicalViewPanelImg.alt = `Canonical View Panel for ${objectConfig.objectDisplayName}`;
+                    }
+                    
+                    const inputJsonData = await fetchJson(objectConfig.stage1_inputJsonPath);
+                    if (s1InputJsonContentEl) {
+                        s1InputJsonContentEl.textContent = inputJsonData ? JSON.stringify(inputJsonData, null, 2) : "Failed to load input JSON.";
+                        if (inputJsonData && typeof hljs !== 'undefined') hljs.highlightElement(s1InputJsonContentEl);
+                    }
+    
+                    if (s1OutputThumbnailsContainer) s1OutputThumbnailsContainer.innerHTML = ''; 
+                    
+                    if (s1VlmOutputLargeGif) {
+                        s1VlmOutputLargeGif.src = objectConfig.stage1_resultGifPath || "./assets/gifs/placeholder_1x1.gif";
+                        s1VlmOutputLargeGif.alt = `VLM Output for ${objectConfig.objectDisplayName} - Stage 1`;
+                    }
+                    if (s1OutputSemanticLabelEl) s1OutputSemanticLabelEl.textContent = "N/A (select hypothesis)"; 
+                    if (s1OutputExpectedTransformEl) s1OutputExpectedTransformEl.textContent = "N/A";
+    
+    
+                    const vlmResponseS1 = currentVLMResponseJsons.stage1 || await fetchJson(objectConfig.stage1_vlmResponseJsonPath);
+                    currentVLMResponseJsons.stage1 = vlmResponseS1; 
+    
+                    if (viewS1OutputJsonBtn) {
+                        viewS1OutputJsonBtn.onclick = () => {
+                            displayJsonInModal(
+                                `VLM Output JSON (Stage 1) - ${objectConfig.objectDisplayName}`,
+                                currentVLMResponseJsons.stage1
+                            );
+                        };
+                    }
+    
+                } else if (currentActiveStage === 'stage2') {
+                    if (stage2FullPromptDisplayEl) {
+                        const specificTaskDescription = objectConfig.taskDescriptionForStage2 || taskData.taskDescriptionForStage2 || "a specified task";
+                        const fullStage2Prompt = STAGE2_VLM_PROMPT_TEMPLATE.replace('<task description>', specificTaskDescription);
+                        stage2FullPromptDisplayEl.textContent = fullStage2Prompt;
+                    }
+    
+                    if (s2VlmOutputLargeGif) {
+                        s2VlmOutputLargeGif.src = objectConfig.stage2_resultGifPath || "./assets/gifs/placeholder_1x1.gif";
+                        s2VlmOutputLargeGif.alt = `VLM Output for ${objectConfig.objectDisplayName} - Stage 2`;
+                    }
+                    
+                    viewS2OutputJsonBtn.onclick = null; 
+    
+                    const vlmResponseS2 = currentVLMResponseJsons.stage2 || await fetchJson(objectConfig.stage2_rawVlmOutputJsonPath);
+                    currentVLMResponseJsons.stage2 = vlmResponseS2;
+    
+                    if (stage2RankingRationaleEl) {
+                        if (vlmResponseS2) {
+                            stage2RankingRationaleEl.textContent = vlmResponseS2.ranking_rationale || vlmResponseS2.rationale || vlmResponseS2.summary || "Details in JSON.";
+                        } else {
+                            stage2RankingRationaleEl.textContent = "Error loading VLM response for Stage 2.";
+                        }
+                    }
+                    
+                    if (viewS2OutputJsonBtn) {
+                         viewS2OutputJsonBtn.onclick = () => {
+                            displayJsonInModal(
+                                `VLM Output JSON (Stage 2) - ${objectConfig.objectDisplayName}`,
+                                currentVLMResponseJsons.stage2
+                            );
+                        };
+                    }
+                }
+            }
+            
+            // --- Real World Validation Video Gallery JS ---
+            function setupVideoGallery(galleryId, leadVideoId) {
+                const gallery = document.getElementById(galleryId);
+                if (!gallery) { /* console.warn("Gallery not found:", galleryId); */ return; }
+                const leadVideo = document.getElementById(leadVideoId);
+                if (!leadVideo) { /* console.warn("Lead video not found:", leadVideoId); */ return; }
+                
+                const thumbnailWrappers = gallery.querySelectorAll('.thumbnail-video-wrapper'); 
+                if (thumbnailWrappers.length === 0) { /* console.warn("No thumbnails in gallery:", galleryId); */ return; }
+    
+                if (thumbnailWrappers[0] && thumbnailWrappers[0].dataset.videoSrc) {
+                    leadVideo.src = thumbnailWrappers[0].dataset.videoSrc;
+                    thumbnailWrappers[0].classList.add('active');
+                }
+    
+                thumbnailWrappers.forEach(wrapper => {
+                    wrapper.addEventListener('click', function() {
+                        leadVideo.src = this.dataset.videoSrc;
+                        thumbnailWrappers.forEach(thumbWrap => thumbWrap.classList.remove('active'));
+                        this.classList.add('active');
+                    });
+                });
+            }
+    
+            setupVideoGallery('nominal-original-thumbs', 'nominal-original-lead-video');
+            setupVideoGallery('cs1-original-thumbs', 'cs1-original-lead-video');
+            setupVideoGallery('cs2-original-thumbs', 'cs2-original-lead-video');
+            setupVideoGallery('cs1-blue-on-cs1-thumbs', 'cs1-blue-on-cs1-lead-video');
+            setupVideoGallery('cs1-blue-on-nominal-thumbs', 'cs1-blue-on-nominal-lead-video');
+            setupVideoGallery('cs2-blue-on-cs2-thumbs', 'cs2-blue-on-cs2-lead-video');
+            setupVideoGallery('cs2-blue-on-nominal-thumbs', 'cs2-blue-on-nominal-lead-video');
+            
+            if (typeof hljs !== 'undefined') {
+                hljs.highlightAll();
+            }
+        });
+    </script>
 
 </html>

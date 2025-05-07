@@ -1,0 +1,16 @@
+{
+    "semantic_object_label": "U-Shaped Bracket",
+    "keypoint_indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+    ],
+    "expected_transformations": [
+        "Bending or flexing the legs of the U shape"
+    ]
+}

@@ -1,0 +1,13 @@
+{
+    "semantic_object_label": "Bottle",
+    "keypoint_indices": [
+        0,
+        10,
+        11,
+        15,
+        16
+    ],
+    "expected_transformations": [
+        "Twisting of the object around its vertical axis."
+    ]
+}

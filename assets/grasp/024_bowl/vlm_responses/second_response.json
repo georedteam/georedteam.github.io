@@ -1,0 +1,13 @@
+{
+    "semantic_object_label": "bowl",
+    "keypoint_indices": [
+        0,
+        1,
+        2,
+        5,
+        12
+    ],
+    "expected_transformations": [
+        "Expand or contract the rim of the bowl."
+    ]
+}
