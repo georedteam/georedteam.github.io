@@ -1,0 +1,10 @@
+{
+    "semantic_object_label": "circular handle mug",
+    "keypoint_indices": [
+        3,
+        9
+    ],
+    "expected_transformations": [
+        "Bending the handle."
+    ]
+}

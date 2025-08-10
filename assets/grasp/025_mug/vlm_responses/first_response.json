@@ -1,0 +1,33 @@
+{
+    "0": {
+        "semantic_object_label": "circular handle mug",
+        "keypoint_indices": [
+            0,
+            5,
+            11
+        ],
+        "expected_transformations": [
+            "Stretching the top rim."
+        ]
+    },
+    "1": {
+        "semantic_object_label": "circular handle mug",
+        "keypoint_indices": [
+            3,
+            9
+        ],
+        "expected_transformations": [
+            "Bending the handle."
+        ]
+    },
+    "2": {
+        "semantic_object_label": "circular handle mug",
+        "keypoint_indices": [
+            4,
+            16
+        ],
+        "expected_transformations": [
+            "Tilting the base."
+        ]
+    }
+}

@@ -1,0 +1,34 @@
+{
+    "0": {
+        "semantic_object_label": "Spoon",
+        "keypoint_indices": [
+            0,
+            1,
+            4
+        ],
+        "expected_transformations": [
+            "Bending or twisting the bowl of the spoon"
+        ]
+    },
+    "1": {
+        "semantic_object_label": "Spoon",
+        "keypoint_indices": [
+            6,
+            7
+        ],
+        "expected_transformations": [
+            "Bending the handle"
+        ]
+    },
+    "2": {
+        "semantic_object_label": "Spoon",
+        "keypoint_indices": [
+            2,
+            3,
+            5
+        ],
+        "expected_transformations": [
+            "Adjusting the curve in the neck of the spoon"
+        ]
+    }
+}

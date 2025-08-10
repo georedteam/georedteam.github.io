@@ -1,0 +1,46 @@
+{
+    "0": {
+        "semantic_object_label": "U-Shaped Bracket",
+        "keypoint_indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+        ],
+        "expected_transformations": [
+            "Bending or flexing the legs of the U shape"
+        ]
+    },
+    "1": {
+        "semantic_object_label": "U-Shaped Bracket",
+        "keypoint_indices": [
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+        ],
+        "expected_transformations": [
+            "Twisting or rotating the base of the U shape"
+        ]
+    },
+    "2": {
+        "semantic_object_label": "U-Shaped Bracket",
+        "keypoint_indices": [
+            1,
+            7,
+            11,
+            14
+        ],
+        "expected_transformations": [
+            "Tilting or inclining the top arms of the U shape"
+        ]
+    }
+}

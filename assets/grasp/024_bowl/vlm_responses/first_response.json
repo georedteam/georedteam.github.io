@@ -1,0 +1,37 @@
+{
+    "0": {
+        "semantic_object_label": "bowl",
+        "keypoint_indices": [
+            0,
+            1,
+            2,
+            5,
+            12
+        ],
+        "expected_transformations": [
+            "Expand or contract the rim of the bowl."
+        ]
+    },
+    "1": {
+        "semantic_object_label": "bowl",
+        "keypoint_indices": [
+            9,
+            11,
+            15,
+            19
+        ],
+        "expected_transformations": [
+            "Alter the shape of the bowl's side profile."
+        ]
+    },
+    "2": {
+        "semantic_object_label": "bowl",
+        "keypoint_indices": [
+            6,
+            18
+        ],
+        "expected_transformations": [
+            "Adjust the height or depth of the bowl."
+        ]
+    }
+}
