@@ -188,6 +188,72 @@
         }
         .vlm-interactive-section .is-size-7 { font-size: 0.8rem !important; }
 
+                /* ==== Global rhythm + typography ==== */
+        :root{
+        --accent:#1f6feb;           /* calm blue accent */
+        --ink:#222;                 /* primary text */
+        --muted:#6b7280;            /* secondary text */
+        --sectionY:clamp(0.25rem,0.25vw,0.25rem);  /* consistent vertical spacing */
+        }
+        html,body{ color:var(--ink); }
+
+        /* Bulma's .section is quite tall by default; tighten it site-wide */
+        .section{ padding-top:var(--sectionY); padding-bottom:var(--sectionY); }
+
+        /* Tighten headings & paragraphs */
+        .title{ margin-bottom:.6rem; line-height:1.15; letter-spacing:-0.015em; }
+        .content p{ margin-bottom:.75rem; }
+
+        /* Figures/tables default bottom margins are large; trim them */
+        figure.image{ margin:1rem auto !important; }
+        .table-container{ margin-top:.75rem; }
+
+        /* ==== Hero/header polish ==== */
+        .hero .hero-body{ padding:clamp(1rem,3vw,2rem) 0 1rem; }
+        .publication-title{
+        font-family:"Google Sans", system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans", sans-serif;
+        font-size:clamp(2rem,5.2vw,3.6rem);
+        font-weight:800;
+        letter-spacing:-0.02em;
+        margin-bottom:.4rem;
+        }
+        .conference-authors{
+        font-family:"Google Sans", sans-serif;
+        font-size:clamp(1.05rem,2.2vw,1.4rem);
+        font-weight:600;
+        color:var(--muted);
+        margin-top:.25rem;
+        }
+
+        /* Small pill for the oral selection */
+        .badge-pill{
+        display:inline-flex; align-items:center; gap:.4em;
+        border:1px solid #fee7db; background:#fff6ee; color:#c81717;
+        font-weight:700; font-size:1rem; line-height:1;
+        padding:.35rem .6rem; border-radius:9999px; margin-top:.5rem;
+        }
+
+        /* Authors + affiliations look dense but readable */
+        .publication-authors{ margin-top:.25rem; }
+        .publication-authors a{ color:inherit; text-decoration:none; border-bottom:1px dotted transparent; }
+        .publication-authors a:hover{ border-bottom-color:#bbb; }
+
+        /* Compact the link buttons row */
+        .publication-links .button{ margin:.25rem .3rem; }
+
+        /* ==== Video galleries & scenarios spacing ==== */
+        .real-world-validation-section .scenario{ margin-bottom:1.5rem; } /* was 3rem */
+        .video-thumbnail-strip{ gap:8px; }
+        .lead-video-player-wrapper{ margin:0 auto .75rem; } /* slightly tighter */
+
+        /* ==== Local tighteners for specific sections that looked airy ==== */
+        .system-overview-section .heading{ margin-bottom:1.2rem !important; }
+        .system-overview-section .content{ margin-top:.75rem !important; }
+        .vlm-prompting-strategy-section .heading{ margin-bottom:1.2rem !important; }
+        .vlm-interactive-section .field{ margin-bottom:.9rem; }
+        .vlm-interactive-section .box{ padding:1rem; }
+
+
       </style>      
 </head>
 
@@ -201,8 +267,10 @@
                         <h1 class="title is-1 publication-title">
                          Geometric Red-Teaming for Robotic Manipulation
                         </h1>
-                        <h3 class="title is-4 conference-authors"><a target="_blank" href="https://www.corl.org/">Conference on Robot Learning (CoRL) 2025</a>
-                    </h3>
+                        <h3 class="title is-4 conference-authors">
+                            <a target="_blank" href="https://www.corl.org/">Conference on Robot Learning (CoRL) 2025</a>
+                        </h3>
+                        <div class="badge-pill">Oral Presentation • 5.7% acceptance</div>
                         <div class="is-size-5 publication-authors">
                             <span class="author-block">
                                 <a target="_blank" href="https://dv-fenix.github.io/">
@@ -215,7 +283,6 @@
                                     href="https://georedteam.github.io"> Helen Qiao</a><sup>2</sup>,
                                 <a target="_blank"
                                     href="https://georedteam.github.io"> Pavel Piliptchak</a><sup>2</sup>,
-                                <br>
                                 <a target="_blank"
                                     href="http://davheld.github.io/">David Held</a><sup>&dagger;1</sup>,
                                 <a target="_blank"
@@ -225,11 +292,10 @@
                         </div>
 
                         <div class="is-size-5 publication-authors">
-                            <span class="author-block"><sup>1</sup>Robotics Institute, Carnegie Mellon University</span> <br>
-                            <span class="author-block"><sup>2</sup>National Institute of Standards and Technology</span>
+                            <span class="author-block"><sup>1</sup>Robotics Institute, Carnegie Mellon University | <sup>2</sup>National Institute of Standards and Technology</span>
                         </div>
                         <div class="is-size-5 publication-authors">
-                            <span class="author-block"><sup> &dagger;</sup>Equal Advising </span>
+                            <span class="author-block">(<sup> &dagger;</sup> indicates equal advising) </span>
                         </div>
 
                         <div class="column has-text-centered">
@@ -265,7 +331,7 @@
     <section class="section png-image-display-section pb-2">
         <div class="container is-max-desktop has-text-centered">
             <figure class="image" style="margin-bottom: 1rem; display: inline-block;">
-                <img src="./assets/figures/pull_figure.png" alt="Overview of the Geometric Red-Teaming framework showing object deformation and policy failure." style="max-height: 75vh; width: auto; max-width: 100%;">
+                <img src="./assets/figures/pull_figure.gif" alt="Overview of the Geometric Red-Teaming framework showing object deformation and policy failure." style="max-height: 75vh; width: auto; max-width: 100%;">
             </figure>
             </div>
     </section>
@@ -277,13 +343,13 @@
                     <h2 class="title is-3 has-text-centered">Abstract</h2>
                     <div class="content has-text-justified">
                         <p style="font-size: 125%">
-                          Standard evaluation protocols in robotic manipulation typically assess policy performance over curated, in-distribution test sets, offering limited insight into how systems fail under plausible variation. 
-                          We introduce a red-teaming framework that probes robustness through object-centric geometric perturbations, automatically generating CrashShapes---structurally valid, user-constrained mesh deformations that trigger catastrophic failures in pre-trained manipulation policies. 
-                          The method integrates a Jacobian field–based deformation model with a gradient-free, simulator-in-the-loop optimization strategy.
-                          Across insertion, articulation, and grasping tasks, our approach consistently discovers deformations that collapse policy performance, revealing brittle failure modes missed by static benchmarks. 
-                          By combining task-level policy rollouts with constraint-aware shape exploration, we aim to build a general purpose framework for structured, object-centric robustness evaluation in robotic manipulation.
-                          We additionally show that fine-tuning on individual CrashShapes, a process we refer to as blue-teaming, improves task success by up to 60 percentage points on those shapes, while preserving performance on the original object, demonstrating the utility of red-teamed geometries for targeted policy refinement.
-                          Finally, we validate both red-teaming and blue-teaming results with a real robotic arm, confirming that the discovered red-teaming failure cases, and corresponding blue-teaming refinement, transfer from simulation to the real world.
+                            Standard evaluation protocols in robotic manipulation typically assess policy performance over curated, in-distribution test sets, offering limited insight into how systems fail under plausible variation. 
+                            We introduce Geometric Red-Teaming (GRT), a red-teaming framework that probes robustness through object-centric geometric perturbations, automatically generating CrashShapes---structurally valid, user-constrained mesh deformations that trigger catastrophic failures in pre-trained manipulation policies. 
+                            The method integrates a Jacobian field–based deformation model with a gradient-free, simulator-in-the-loop optimization strategy.
+                            Across insertion, articulation, and grasping tasks, GRT consistently discovers deformations that collapse policy performance, revealing brittle failure modes missed by static benchmarks. 
+                            By combining task-level policy rollouts with constraint-aware shape exploration, we aim to build a general purpose framework for structured, object-centric robustness evaluation in robotic manipulation.
+                            We additionally show that fine-tuning on individual CrashShapes, a process we refer to as blue-teaming, improves task success by up to 60 percentage points on those shapes, while preserving performance on the original object, demonstrating the utility of red-teamed geometries for targeted policy refinement.
+                            Finally, we validate both red-teaming and blue-teaming results with a real robotic arm, observing that simulated CrashShapes reduce task success from 90% to as low as 22.5%, and that blue-teaming recovers performance to up to 90% on the corresponding real-world geometry---closely matching simulation outcomes.
 <br><br>
                         </p>
                     </div>
@@ -302,7 +368,7 @@
             
             <div class="content has-text-justified" style="margin-top: 1rem;">
                 <p class="is-size-6 figure-caption">
-                    <strong>System overview of our geometric red-teaming pipeline.</strong> Given a task description and nominal object (<em>Initialization Parameters</em>), our pipeline first selects anchor and handle points using a vision-language model (<strong>a</strong>). Initial handle displacements are sampled to define a population of deformation candidates. Each sample is converted into a perturbed mesh via Jacobian field-based optimization (<strong>b</strong>) and evaluated in simulation with a frozen policy (<strong>c</strong>). Deformations that induce failure are selected and mutated to guide the next population.
+                    <strong>System overview of GRT.</strong> Given a task description and nominal object (Initialization Parameters), anchor and handle points are selected using a vision-language model (a). Handle displacements are sampled to define a population of deformation candidates. Each sample is converted into a perturbed mesh via Jacobian field-based optimization (b) and evaluated in simulation with a frozen policy (c). Deformations that induce failure are sampled to guide the next population.
                 </p>
             </div>
 
